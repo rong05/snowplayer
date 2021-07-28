@@ -1,0 +1,14 @@
+prefix=/mnt/d/learn/FFmpeg-master/android/armv8-a
+exec_prefix=${prefix}
+libdir=/mnt/d/learn/FFmpeg-master/android/armv8-a/lib
+includedir=/mnt/d/learn/FFmpeg-master/android/armv8-a/include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 8.0.101
+Requires: 
+Requires.private: libavutil >= 57.0.100
+Conflicts:
+Libs: -L${libdir}  -lavfilter 
+Libs.private: -pthread -lm
+Cflags: -I${includedir}

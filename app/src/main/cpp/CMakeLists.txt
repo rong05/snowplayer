@@ -6,7 +6,7 @@
 cmake_minimum_required(VERSION 3.10.2)
 
 # Declares and names the project.
-set(DIR ../../../../libs)
+#set(DIR ../../../../libs)
 
 project("snowplayer")
 
@@ -25,54 +25,61 @@ set(ffmpeg_head_dir ${CMAKE_SOURCE_DIR})
 include_directories(${ffmpeg_head_dir}/include)
 
 # 3. 添加ffmpeg相关的so库
-add_library( avutil
-        SHARED
-        IMPORTED )
-set_target_properties( avutil
-        PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libavutil.so )
-
-add_library( swresample
-        SHARED
-        IMPORTED )
-set_target_properties( swresample
-        PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libswresample.so )
-
-add_library( avcodec
-        SHARED
-        IMPORTED )
-set_target_properties( avcodec
-        PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libavcodec.so )
-
-add_library( avfilter
+add_library(avutil
         SHARED
         IMPORTED)
-set_target_properties( avfilter
+set_target_properties(avutil
         PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libavfilter.so )
+        ${ffmpeg_lib_dir}/libavutil.so)
 
-add_library( swscale
+add_library(swresample
         SHARED
         IMPORTED)
-set_target_properties( swscale
+set_target_properties(swresample
         PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libswscale.so )
+        ${ffmpeg_lib_dir}/libswresample.so)
 
-add_library( avformat
+add_library(avcodec
         SHARED
         IMPORTED)
-set_target_properties( avformat
+set_target_properties(avcodec
         PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libavformat.so )
+        ${ffmpeg_lib_dir}/libavcodec.so)
 
-add_library( avdevice
+add_library(avfilter
         SHARED
         IMPORTED)
-set_target_properties( avdevice
+set_target_properties(avfilter
         PROPERTIES IMPORTED_LOCATION
-        ${ffmpeg_lib_dir}/libavdevice.so )
+        ${ffmpeg_lib_dir}/libavfilter.so)
+
+add_library(swscale
+        SHARED
+        IMPORTED)
+set_target_properties(swscale
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg_lib_dir}/libswscale.so)
+
+add_library(avformat
+        SHARED
+        IMPORTED)
+set_target_properties(avformat
+        PROPERTIES IMPORTED_LOCATION
+        ${ffmpeg_lib_dir}/libavformat.so)
+
+# 查找当前目录所有源文件 并将名称保存到 DIR_SRCS 变量
+# 注意这样不能查找子目录，也不会自动往子目录找
+aux_source_directory(${CMAKE_SOURCE_DIR}/src DIR_SRCS)
+# 或者也可以使用如果通配符的方式，引入所有.c文件，同样保存到 DIR_SRCS变量中
+file(GLOB DIR_SRCS *.c)
+#file(GLOB DIR_SRCS *.cpp)
+
+#add_library( avdevice
+#        SHARED
+#        IMPORTED)
+#set_target_properties( avdevice
+#        PROPERTIES IMPORTED_LOCATION
+#        ${ffmpeg_lib_dir}/libavdevice.so )
 
 
 add_library( # Sets the name of the library.
@@ -114,7 +121,8 @@ target_link_libraries( # Specifies the target library.
         avfilter
         swscale
         avformat
-        avdevice
+        #avdevice
         # Links the target library to the log library
         # included in the NDK.
+        ${DIR_SRCS}
         ${log-lib})

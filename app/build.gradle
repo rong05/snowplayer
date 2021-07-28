@@ -5,6 +5,7 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    ndkVersion "22.1.7171670"
 
     defaultConfig {
         applicationId "com.example.android.snowplayer"
@@ -16,7 +17,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
-                cppFlags ''
+                cppFlags "-std=c++11"
             }
         }
     }
@@ -39,6 +40,13 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    sourceSets {
+        main {
+            // The libs directory contains prebuilt libraries that are used by the
+            // app's library defined in CMakeLists.txt via an IMPORTED target.
+            jniLibs.srcDirs = ['src/main/jinLibs']
+        }
     }
 }
 
