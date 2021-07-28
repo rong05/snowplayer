@@ -18,8 +18,17 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11"
+                //也可以使用下面这种语法向变量传递参数 ：
+                // arguments "-D变量名=参数".
+                arguments "-DANDROID_ARM_NEON=TRUE",
+                        // 使用下面这种语法向变量传递多个参数（参数之间使用空格隔开）：
+                        // arguments "-D变量名=参数1 参数2"
+                        "-DANDROID_CPP_FEATURES=rtti exceptions",
+                        "-DANDROID_STL=c++_shared"
+                abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86'
             }
         }
+
     }
 
     buildTypes {
@@ -38,9 +47,7 @@ android {
             version '3.10.2'
         }
     }
-    buildFeatures {
-        viewBinding true
-    }
+
     sourceSets {
         main {
             // The libs directory contains prebuilt libraries that are used by the
@@ -48,6 +55,11 @@ android {
             jniLibs.srcDirs = ['src/main/jinLibs']
         }
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
 }
 
 dependencies {

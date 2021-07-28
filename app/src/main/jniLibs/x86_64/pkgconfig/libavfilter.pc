@@ -1,13 +1,13 @@
-prefix=/mnt/d/learn/FFmpeg-master/android/x86_64
+prefix=/Users/wangxueke/FFmpeg/android/x86_64
 exec_prefix=${prefix}
-libdir=/mnt/d/learn/FFmpeg-master/android/x86_64/lib
-includedir=/mnt/d/learn/FFmpeg-master/android/x86_64/include
+libdir=/Users/wangxueke/FFmpeg/android/libs/x86_64
+includedir=/Users/wangxueke/FFmpeg/android/x86_64/include
 
 Name: libavfilter
 Description: FFmpeg audio/video filtering library
-Version: 8.0.101
+Version: 8.0.103
 Requires: 
-Requires.private: libavutil >= 57.0.100
+Requires.private: libavutil >= 57.2.100
 Conflicts:
 Libs: -L${libdir}  -lavfilter 
 Libs.private: -pthread -lm

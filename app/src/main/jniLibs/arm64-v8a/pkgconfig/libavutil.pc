@@ -1,11 +1,11 @@
-prefix=/mnt/d/learn/FFmpeg-master/android/armv8-a
+prefix=/Users/wangxueke/FFmpeg/android/arm64-v8a
 exec_prefix=${prefix}
-libdir=/mnt/d/learn/FFmpeg-master/android/armv8-a/lib
-includedir=/mnt/d/learn/FFmpeg-master/android/armv8-a/include
+libdir=/Users/wangxueke/FFmpeg/android/libs/arm64-v8a
+includedir=/Users/wangxueke/FFmpeg/android/arm64-v8a/include
 
 Name: libavutil
 Description: FFmpeg utility library
-Version: 57.0.100
+Version: 57.2.100
 Requires: 
 Requires.private: 
 Conflicts:

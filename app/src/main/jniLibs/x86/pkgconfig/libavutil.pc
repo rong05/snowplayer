@@ -1,11 +1,11 @@
-prefix=/mnt/d/learn/FFmpeg-master/android/x86
+prefix=/Users/wangxueke/FFmpeg/android/x86
 exec_prefix=${prefix}
-libdir=/mnt/d/learn/FFmpeg-master/android/x86/lib
-includedir=/mnt/d/learn/FFmpeg-master/android/x86/include
+libdir=/Users/wangxueke/FFmpeg/android/libs/x86
+includedir=/Users/wangxueke/FFmpeg/android/x86/include
 
 Name: libavutil
 Description: FFmpeg utility library
-Version: 57.0.100
+Version: 57.2.100
 Requires: 
 Requires.private: 
 Conflicts:

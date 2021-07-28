@@ -15,14 +15,18 @@ project("snowplayer")
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 # 支持gnu++11
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
-
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+# Declares and names the project.
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-D__STDC_CONSTANT_MACROS")
+message(STATUS "CMAKE_CURRENT_SOURCE_DIR IS ${CMAKE_CURRENT_SOURCE_DIR}")
 # 1. 定义so库和头文件所在目录，方面后面使用
-set(ffmpeg_lib_dir ${CMAKE_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
-set(ffmpeg_head_dir ${CMAKE_SOURCE_DIR})
+set(ffmpeg_lib_dir ${CMAKE_CURRENT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
+#set(ffmpeg_head_dir ${CMAKE_CURRENT_SOURCE_DIR})
 
 # 2. 添加头文件目录
-include_directories(${ffmpeg_head_dir}/include)
+include_directories(include)
 
 # 3. 添加ffmpeg相关的so库
 add_library(avutil
@@ -69,10 +73,12 @@ set_target_properties(avformat
 
 # 查找当前目录所有源文件 并将名称保存到 DIR_SRCS 变量
 # 注意这样不能查找子目录，也不会自动往子目录找
-aux_source_directory(${CMAKE_SOURCE_DIR}/src DIR_SRCS)
+#aux_source_directory(src DIR_SRCS)
 # 或者也可以使用如果通配符的方式，引入所有.c文件，同样保存到 DIR_SRCS变量中
-file(GLOB DIR_SRCS *.c)
+file(GLOB_RECURSE DIR_SRCS src/*.c)
 #file(GLOB DIR_SRCS *.cpp)
+file(GLOB_RECURSE SRC_LIST  src/*.cpp)
+file(GLOB_RECURSE SRC_LIST_INLUDE  include/*.h)
 
 #add_library( avdevice
 #        SHARED
@@ -87,19 +93,22 @@ add_library( # Sets the name of the library.
 
         # Sets the library as a shared library.
         SHARED
-
+        ${DIR_SRCS}
+        ${SRC_LIST}
+        ${SRC_LIST_INLUDE}
         # Provides a relative path to your source file(s).
-        native-lib.cpp)
+        )
 
+#message(${SRC_LIST})
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
-include_directories(
-        include
-)
+#include_directories(
+#        include
+#)
 
 find_library( # Sets the name of the path variable.
         log-lib
@@ -114,6 +123,9 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
         native-lib
+
+        android
+        jnigraphics
         # 4. 连接 FFmpeg 相关的库
         avutil
         swresample
@@ -124,5 +136,4 @@ target_link_libraries( # Specifies the target library.
         #avdevice
         # Links the target library to the log library
         # included in the NDK.
-        ${DIR_SRCS}
         ${log-lib})

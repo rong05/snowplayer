@@ -1,13 +1,13 @@
-prefix=/mnt/d/learn/FFmpeg-master/android/armv7-a
+prefix=/Users/wangxueke/FFmpeg/android/armeabi-v7a
 exec_prefix=${prefix}
-libdir=/mnt/d/learn/FFmpeg-master/android/armv7-a/lib
-includedir=/mnt/d/learn/FFmpeg-master/android/armv7-a/include
+libdir=/Users/wangxueke/FFmpeg/android/libs/armeabi-v7a
+includedir=/Users/wangxueke/FFmpeg/android/armeabi-v7a/include
 
 Name: libavcodec
 Description: FFmpeg codec library
-Version: 59.1.100
+Version: 59.3.102
 Requires: 
-Requires.private: libswresample >= 4.0.100, libavutil >= 57.0.100
+Requires.private: libswresample >= 4.0.100, libavutil >= 57.2.100
 Conflicts:
 Libs: -L${libdir}  -lavcodec 
 Libs.private: -pthread -lm -lz
