@@ -86,7 +86,13 @@ file(GLOB_RECURSE SRC_LIST_INLUDE  include/*.h)
 #set_target_properties( avdevice
 #        PROPERTIES IMPORTED_LOCATION
 #        ${ffmpeg_lib_dir}/libavdevice.so )
+IF (${CMAKE_HOST_SYSTEM_NAME} MATCHES "Windows")
+    ADD_DEFINITIONS(-DWindows)
+ELSE (${CMAKE_HOST_SYSTEM_NAME} MATCHES "Linux")
+    ADD_DEFINITIONS(-DLinux)
+ENDIF ()
 
+ADD_DEFINITIONS(-DDEBUG)
 
 add_library( # Sets the name of the library.
         native-lib

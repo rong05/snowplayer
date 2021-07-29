@@ -5,11 +5,16 @@
 #ifndef SNOWPLAYER_AVINFORMATION_H
 #define SNOWPLAYER_AVINFORMATION_H
 extern "C" {
-#include <libavformat/avformat.h>c
+#include <libavformat/avformat.h>
 }
+#include "base/common.h"
+#include "string"
 namespace SnowPlayer {
 
     class AVInFormation {
+    private:
+        AVInFormation(const AVInFormation& formation);
+        AVInFormation& operator=(const AVInFormation& formation);
     public:
         AVInFormation();
 

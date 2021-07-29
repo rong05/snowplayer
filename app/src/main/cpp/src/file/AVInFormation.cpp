@@ -1,11 +1,11 @@
 #include "tools/AVInFormation.h"
-#include "base/SnowPlayerNativeException.h"
+#include "exception/SnowPlayerNativeException.h"
 
 namespace SnowPlayer{
     AVInFormation::AVInFormation() {
         input_AVFormat_context_ = avformat_alloc_context();
         if(input_AVFormat_context_ == nullptr){
-            throw SnowPlayerNativeException("avformat alloc context is nullptr !");
+            throw SnowPlayerNullPointerException("avformat alloc context is nullptr !");
         }
     }
 
