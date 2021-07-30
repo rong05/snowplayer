@@ -1,0 +1,14 @@
+prefix=/Users/wangxueke/FFmpeg/android/x86_64
+exec_prefix=${prefix}
+libdir=/Users/wangxueke/FFmpeg/android/libs/x86_64
+includedir=/Users/wangxueke/FFmpeg/android/x86_64/include
+
+Name: libswresample
+Description: FFmpeg audio resampling library
+Version: 4.0.100
+Requires: 
+Requires.private: libavutil >= 57.2.100
+Conflicts:
+Libs: -L${libdir}  -lswresample 
+Libs.private: -lm
+Cflags: -I${includedir}

@@ -1,0 +1,14 @@
+prefix=/Users/wangxueke/FFmpeg/android/arm64-v8a
+exec_prefix=${prefix}
+libdir=/Users/wangxueke/FFmpeg/android/libs/arm64-v8a
+includedir=/Users/wangxueke/FFmpeg/android/arm64-v8a/include
+
+Name: libavformat
+Description: FFmpeg container format library
+Version: 59.4.101
+Requires: 
+Requires.private: libavcodec >= 59.3.102, libswresample >= 4.0.100, libavutil >= 57.2.100
+Conflicts:
+Libs: -L${libdir}  -lavformat 
+Libs.private: -lm -lz
+Cflags: -I${includedir}

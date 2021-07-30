@@ -1,0 +1,14 @@
+prefix=/Users/wangxueke/FFmpeg/android/x86
+exec_prefix=${prefix}
+libdir=/Users/wangxueke/FFmpeg/android/libs/x86
+includedir=/Users/wangxueke/FFmpeg/android/x86/include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 8.0.103
+Requires: 
+Requires.private: libavutil >= 57.2.100
+Conflicts:
+Libs: -L${libdir}  -lavfilter 
+Libs.private: -pthread -lm
+Cflags: -I${includedir}

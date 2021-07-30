@@ -1,0 +1,14 @@
+prefix=/Users/wangxueke/FFmpeg/android/armeabi-v7a
+exec_prefix=${prefix}
+libdir=/Users/wangxueke/FFmpeg/android/libs/armeabi-v7a
+includedir=/Users/wangxueke/FFmpeg/android/armeabi-v7a/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 57.2.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil 
+Libs.private: -pthread -lm
+Cflags: -I${includedir}

@@ -1,0 +1,14 @@
+prefix=/Users/wangxueke/FFmpeg/android/armeabi-v7a
+exec_prefix=${prefix}
+libdir=/Users/wangxueke/FFmpeg/android/libs/armeabi-v7a
+includedir=/Users/wangxueke/FFmpeg/android/armeabi-v7a/include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 8.0.103
+Requires: 
+Requires.private: libavutil >= 57.2.100
+Conflicts:
+Libs: -L${libdir}  -lavfilter 
+Libs.private: -pthread -lm
+Cflags: -I${includedir}
