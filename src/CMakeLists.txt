@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.10.2)
 
 # Declares and names the project.
 #set(DIR ../../../../libs)
-#include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/android.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/android.cmake)
 project("snowplayer")
 
 # Creates and names a library, sets it as either STATIC
@@ -18,9 +18,9 @@ project("snowplayer")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 # Declares and names the project.
 set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-D__STDC_CONSTANT_MACROS")
+# set(CMAKE_C_STANDARD 11)
+# set(CMAKE_CXX_STANDARD 11)
+# set(CMAKE_CXX_FLAGS "-D__STDC_CONSTANT_MACROS")
 message(STATUS "CMAKE_CURRENT_SOURCE_DIR IS ${CMAKE_CURRENT_SOURCE_DIR}")
 # 1. 定义so库和头文件所在目录，方面后面使用
 set(ffmpeg_lib_dir ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_SYSTEM_NAME}/${ANDROID_ABI})
@@ -96,7 +96,7 @@ ENDIF ()
 ADD_DEFINITIONS(-DDEBUG)
 
 add_library( # Sets the name of the library.
-        native-lib
+        snowplayer
 
         # Sets the library as a shared library.
         SHARED
@@ -129,7 +129,7 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-        native-lib
+        snowplayer
 
         android
         jnigraphics
