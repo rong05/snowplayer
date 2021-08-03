@@ -76,9 +76,10 @@ set_target_properties(avformat
 # 注意这样不能查找子目录，也不会自动往子目录找
 #aux_source_directory(src DIR_SRCS)
 # 或者也可以使用如果通配符的方式，引入所有.c文件，同样保存到 DIR_SRCS变量中
-file(GLOB_RECURSE DIR_SRCS *.c)
+file(GLOB_RECURSE DIR_SRCS file/*.c)
 #file(GLOB DIR_SRCS *.cpp)
-file(GLOB_RECURSE SRC_LIST  *.cpp)
+file(GLOB_RECURSE SRC_LIST  file/*.cpp)
+
 file(GLOB_RECURSE SRC_LIST_INLUDE  include/*.h)
 
 #add_library( avdevice
@@ -87,10 +88,13 @@ file(GLOB_RECURSE SRC_LIST_INLUDE  include/*.h)
 #set_target_properties( avdevice
 #        PROPERTIES IMPORTED_LOCATION
 #        ${ffmpeg_lib_dir}/libavdevice.so )
-IF (${CMAKE_HOST_SYSTEM_NAME} MATCHES "Windows")
+IF (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     ADD_DEFINITIONS(-DWindows)
-ELSE (${CMAKE_HOST_SYSTEM_NAME} MATCHES "Linux")
+ELSEIF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     ADD_DEFINITIONS(-DLinux)
+ELSE (${CMAKE_HOST_SYSTEM_NAME} MATCHES "Android")
+    file(GLOB_RECURSE DIR_SRCS jni/*.c)
+    file(GLOB_RECURSE SRC_LIST  jni/*.cpp)
 ENDIF ()
 
 ADD_DEFINITIONS(-DDEBUG)
@@ -131,8 +135,8 @@ find_library( # Sets the name of the path variable.
 target_link_libraries( # Specifies the target library.
         snowplayer
 
-        android
-        jnigraphics
+        # android
+        # jnigraphics
         # 4. 连接 FFmpeg 相关的库
         avutil
         swresample
@@ -140,7 +144,51 @@ target_link_libraries( # Specifies the target library.
         avfilter
         swscale
         avformat
+)
         #avdevice
         # Links the target library to the log library
         # included in the NDK.
-        ${log-lib})
+        # ${log-lib})
+
+#*******************************snowplayer test exeplication***************************
+
+
+# 设置目标文件的名字
+set(TARGET_NAME snowplayer_test)
+
+# 生成可执行文件
+add_executable(${TARGET_NAME} main.cpp)
+
+
+target_link_libraries( # Specifies the target library.
+       ${TARGET_NAME}
+
+        snowplayer
+        # 4. 连接 FFmpeg 相关的库
+        avutil
+        swresample
+        avcodec
+        avfilter
+        swscale
+        avformat
+        #jnigraphics
+
+        #avdevice
+        # Links the target library to the log library
+        # included in the NDK.
+)
+IF (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+ELSEIF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+ELSE (${CMAKE_SYSTEM_NAME} MATCHES "Android")
+target_link_libraries( # Specifies the target library.
+       ${TARGET_NAME}
+       android
+       ${log-lib}
+)
+target_link_libraries( # Specifies the target library.
+        snowplayer
+        android
+        ${log-lib}
+        jnigraphics
+)
+ENDIF ()

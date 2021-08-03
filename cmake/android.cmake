@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6.0)
 #NDK-file-path
-#set(ANDROID_NDK "/mnt/d/learn/android-ndk-r22b")
-set(ANDROID_NDK "/Users/wangxueke/android/sdk/ndk/22.1.7171670")
+set(ANDROID_NDK "/mnt/d/learn/android-ndk-r22b")
+#set(ANDROID_NDK "/Users/wangxueke/android/sdk/ndk/22.1.7171670")
 set(CMAKE_TOOLCHAIN_FILE ${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
 #set(CMAKE_MAKE_PROGRAM /usr/bin/ninja)
 #set(CMAKE_GENERATOR "Ninja")

@@ -9,6 +9,7 @@ extern "C"{
 #include <libswresample/version.h>
 #include <libswscale/version.h>
 }
+#include "utils/Log.h"
 
 extern "C"
 JNIEXPORT jstring JNICALL
@@ -31,5 +32,6 @@ Java_com_example_android_snowplayer_MainActivity_stringFromJNI(JNIEnv *env, jobj
     strcat(strBuffer, avcodec_configuration());
     strcat(strBuffer, "\navcodec_license : ");
     strcat(strBuffer, avcodec_license());
+    LOGD("%s",strBuffer);
     return env->NewStringUTF(strBuffer);
 }
